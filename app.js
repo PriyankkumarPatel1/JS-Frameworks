@@ -68,8 +68,13 @@ app.get('/about', (req, res) => {
 
 /* now we wants express to listen our request.*/
 // syntax: port number, and callback function.
-app.listen(4000, () => console.log('Listening on port 4000.'));
+//app.listen(4000, () => console.log('Listening on port 4000.'));
+// this is  causing error for heroku app, because we can't fix the port at 4000.
 
+const port = process.env.PORT || 4000;
+// process is global object created by environment. 
+// if port is given by environment then store value to port or use 4000 port(default).
+app.listen(port, () => console.log(`Listening on port ${port}.`));
 
 /**
  * "start": "node app.js" added to script in package.json file, to execute this file when we write
